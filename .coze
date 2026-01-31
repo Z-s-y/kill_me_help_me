@@ -1,0 +1,10 @@
+[project]
+requires = ["java-8", "maven"]
+
+[dev]
+build = ["mvn", "clean", "install"]
+run = ["mvn", "spring-boot:run", "-Dspring-boot.run.arguments=--server.port=5000"]
+
+[deploy]
+build = ["mvn", "clean", "package"]
+run = ["java", "-jar", "target/wechat-miniprogram-backend-1.0.0.jar", "--server.port=5000"]
