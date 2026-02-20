@@ -20,7 +20,6 @@ public class Application {
         System.out.println("========================================\n");
 
         UserDao userDao = new UserDaoImpl();
-        User user = new User("1", "张三", "/uploads/zhangsan.jpg");
-        userDao.insert(user);
+        userDao.deleteById("1");
     }
 }
