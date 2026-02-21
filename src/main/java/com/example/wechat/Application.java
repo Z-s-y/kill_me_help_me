@@ -9,6 +9,8 @@ import com.example.wechat.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -24,8 +26,11 @@ public class Application {
         System.out.println("访问地址: http://localhost:5000");
         System.out.println("========================================\n");
 
-        Date date = new Date("2028-01-01 00:00:00");
-        Date date2 = new Date("2028-01-02 00:00:00");
+        LocalDateTime localDateTime = LocalDateTime.of(2026, 2, 21, 23, 15, 0);
+        Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        LocalDateTime localDateTime2 = LocalDateTime.of(2026, 2, 21, 23, 45, 0);
+        Date date2 = Date.from(localDateTime2.atZone(ZoneId.systemDefault()).toInstant());
+
 
         Game game = new Game(1, "type", date, date2, "master");
         GameDao gameDao = new GameDaoImpl();
