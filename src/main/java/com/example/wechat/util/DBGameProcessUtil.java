@@ -10,7 +10,7 @@ public class DBGameProcessUtil {
 
     static {
         try {
-            props.load(DBUserInformationUtil.class.getClassLoader().getResourceAsStream("db_game_process"));
+            props.load(DBUserInformationUtil.class.getClassLoader().getResourceAsStream("db_game_process.properties"));
             Class.forName(props.getProperty("jdbc.driver"));
         } catch (Exception e) {
             throw new RuntimeException("数据库驱动加载失败", e);
