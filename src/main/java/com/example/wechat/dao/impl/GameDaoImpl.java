@@ -31,7 +31,7 @@ public class GameDaoImpl implements GameDao {
             stmt.setString(1, game.getGameType());
             stmt.setTimestamp(2, new java.sql.Timestamp(game.getStartTime().getTime()));
             stmt.setTimestamp(3, new java.sql.Timestamp(game.getEndTime().getTime()));
-            stmt.setString(4, game.getGameMaster());
+            stmt.setInt(4, game.getGameMaster());
             return stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -67,7 +67,7 @@ public class GameDaoImpl implements GameDao {
             stmt.setString(1, game.getGameType());
             stmt.setTimestamp(2, new java.sql.Timestamp(game.getStartTime().getTime()));
             stmt.setTimestamp(3, new java.sql.Timestamp(game.getEndTime().getTime()));
-            stmt.setString(4, game.getGameMaster());
+            stmt.setInt(4, game.getGameMaster());
             stmt.setInt(5, game.getId());
             return stmt.executeUpdate();
         } catch (SQLException e) {
@@ -93,7 +93,7 @@ public class GameDaoImpl implements GameDao {
                         rs.getString("game_type"),
                         rs.getTimestamp("start_time"),
                         rs.getTimestamp("end_time"),
-                        rs.getString("game_master")
+                        rs.getInt("game_master")
                 );
             }
             return null;
@@ -120,7 +120,7 @@ public class GameDaoImpl implements GameDao {
                         rs.getString("game_type"),
                         rs.getTimestamp("start_time"),
                         rs.getTimestamp("end_time"),
-                        rs.getString("game_master")
+                        rs.getInt("game_master")
                 ));
             }
             return games;
@@ -148,7 +148,7 @@ public class GameDaoImpl implements GameDao {
                         rs.getString("game_type"),
                         rs.getTimestamp("start_time"),
                         rs.getTimestamp("end_time"),
-                        rs.getString("game_master")
+                        rs.getInt("game_master")
                 ));
             }
             return games;
@@ -176,7 +176,7 @@ public class GameDaoImpl implements GameDao {
                         rs.getString("game_type"),
                         rs.getTimestamp("start_time"),
                         rs.getTimestamp("end_time"),
-                        rs.getString("game_master")
+                        rs.getInt("game_master")
                 ));
             }
             return games;

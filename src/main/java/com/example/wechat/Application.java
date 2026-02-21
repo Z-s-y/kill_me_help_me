@@ -32,7 +32,7 @@ public class Application {
         Date date2 = Date.from(localDateTime2.atZone(ZoneId.systemDefault()).toInstant());
 
 
-        Game game = new Game(1, "type", date, date2, "master");
+        Game game = new Game(1, "type", date, date2, 1);
         GameDao gameDao = new GameDaoImpl();
         gameDao.insert(game);
     }

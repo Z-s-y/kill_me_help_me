@@ -7,12 +7,12 @@ public class Game {
     private String gameType;
     private Date startTime;
     private Date endTime;
-    private String gameMaster;
+    private Integer gameMaster;
 
     public Game() {
     }
 
-    public Game(Integer id, String gameType, Date startTime, Date endTime, String gameMaster) {
+    public Game(Integer id, String gameType, Date startTime, Date endTime, Integer gameMaster) {
         this.id = id;
         this.gameType = gameType;
         this.startTime = startTime;
@@ -53,11 +53,11 @@ public class Game {
         this.endTime = endTime;
     }
 
-    public String getGameMaster() {
+    public Integer getGameMaster() {
         return gameMaster;
     }
 
-    public void setGameMaster(String gameMaster) {
+    public void setGameMaster(Integer gameMaster) {
         this.gameMaster = gameMaster;
     }
 
