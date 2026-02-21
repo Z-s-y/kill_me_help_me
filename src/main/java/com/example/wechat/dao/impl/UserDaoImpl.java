@@ -4,7 +4,7 @@ package com.example.wechat.dao.impl;
 
 import com.example.wechat.dao.UserDao;
 import com.example.wechat.model.User;
-import com.example.wechat.util.DBUtil;
+import com.example.wechat.util.DBUserInformationUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUserInformationUtil.getConnection();
             stmt = conn.prepareStatement(INSERT_SQL);
             stmt.setString(1, user.getId());
             stmt.setString(2, user.getName());
@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException("插入用户失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBUserInformationUtil.close(conn, stmt);
         }
     }
 
@@ -44,14 +44,14 @@ public class UserDaoImpl implements UserDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUserInformationUtil.getConnection();
             stmt = conn.prepareStatement(DELETE_SQL);
             stmt.setString(1, id);
             return stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("删除用户失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBUserInformationUtil.close(conn, stmt);
         }
     }
 
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUserInformationUtil.getConnection();
             stmt = conn.prepareStatement(UPDATE_SQL);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getProfilePicturePath());
@@ -69,7 +69,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException("更新用户失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBUserInformationUtil.close(conn, stmt);
         }
     }
 
@@ -79,7 +79,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUserInformationUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_ID_SQL);
             stmt.setString(1, id);
             rs = stmt.executeQuery();
@@ -94,7 +94,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException("查询用户失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBUserInformationUtil.close(conn, stmt, rs);
         }
     }
 
@@ -105,7 +105,7 @@ public class UserDaoImpl implements UserDao {
         ResultSet rs = null;
         List<User> users = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBUserInformationUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_ALL_SQL);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -119,7 +119,7 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new RuntimeException("查询所有用户失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBUserInformationUtil.close(conn, stmt, rs);
         }
     }
 }

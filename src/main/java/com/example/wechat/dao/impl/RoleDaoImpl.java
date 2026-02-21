@@ -3,7 +3,8 @@ package com.example.wechat.dao.impl;
 
 import com.example.wechat.dao.RoleDao;
 import com.example.wechat.model.Role;
-import com.example.wechat.util.DBUtil;
+import com.example.wechat.util.DBGameProcessUtil;
+import com.example.wechat.util.DBUserInformationUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class RoleDaoImpl implements RoleDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(INSERT_SQL);
             int index = 1;
             stmt.setInt(index++, role.getGameId());
@@ -54,7 +55,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("插入角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBGameProcessUtil.close(conn, stmt);
         }
     }
 
@@ -63,14 +64,14 @@ public class RoleDaoImpl implements RoleDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(DELETE_SQL);
             stmt.setInt(1, id);
             return stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("删除角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBGameProcessUtil.close(conn, stmt);
         }
     }
 
@@ -79,7 +80,7 @@ public class RoleDaoImpl implements RoleDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(UPDATE_SQL);
             int index = 1;
             stmt.setInt(index++, role.getGameId());
@@ -93,7 +94,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("更新角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBGameProcessUtil.close(conn, stmt);
         }
     }
 
@@ -103,7 +104,7 @@ public class RoleDaoImpl implements RoleDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_ID_SQL);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
@@ -114,7 +115,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -125,7 +126,7 @@ public class RoleDaoImpl implements RoleDao {
         ResultSet rs = null;
         List<Role> roles = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_ALL_SQL);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -135,7 +136,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("查询所有角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -146,7 +147,7 @@ public class RoleDaoImpl implements RoleDao {
         ResultSet rs = null;
         List<Role> roles = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_GAME_ID_SQL);
             stmt.setInt(1, gameId);
             rs = stmt.executeQuery();
@@ -157,7 +158,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据游戏ID查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -168,7 +169,7 @@ public class RoleDaoImpl implements RoleDao {
         ResultSet rs = null;
         List<Role> roles = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_USER_ID_SQL);
             stmt.setInt(1, userId);
             rs = stmt.executeQuery();
@@ -179,7 +180,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据用户ID查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -190,7 +191,7 @@ public class RoleDaoImpl implements RoleDao {
         ResultSet rs = null;
         List<Role> roles = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_ROLE_NAME_SQL);
             stmt.setString(1, roleName);
             rs = stmt.executeQuery();
@@ -201,7 +202,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据角色名称查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -212,7 +213,7 @@ public class RoleDaoImpl implements RoleDao {
         ResultSet rs = null;
         List<Role> roles = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_ROLE_STATUS_SQL);
             stmt.setString(1, roleStatus);
             rs = stmt.executeQuery();
@@ -223,7 +224,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据角色状态查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -234,7 +235,7 @@ public class RoleDaoImpl implements RoleDao {
         ResultSet rs = null;
         List<Role> roles = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_SETTLE_FACTION_SQL);
             stmt.setString(1, settleFaction);
             rs = stmt.executeQuery();
@@ -245,7 +246,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据结算阵营查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -255,7 +256,7 @@ public class RoleDaoImpl implements RoleDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_GAME_ID_AND_USER_ID_SQL);
             stmt.setInt(1, gameId);
             stmt.setInt(2, userId);
@@ -267,7 +268,7 @@ public class RoleDaoImpl implements RoleDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据游戏ID和用户ID查询角色失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 

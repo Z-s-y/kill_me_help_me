@@ -2,7 +2,7 @@ package com.example.wechat.dao.impl;
 
 import com.example.wechat.dao.GameDao;
 import com.example.wechat.model.Game;
-import com.example.wechat.util.DBUtil;
+import com.example.wechat.util.DBGameProcessUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class GameDaoImpl implements GameDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(INSERT_SQL);
             stmt.setString(1, game.getGameType());
             stmt.setTimestamp(2, new java.sql.Timestamp(game.getStartTime().getTime()));
@@ -37,7 +37,7 @@ public class GameDaoImpl implements GameDao {
             System.out.println(e);
             throw new RuntimeException("插入游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBGameProcessUtil.close(conn, stmt);
         }
     }
 
@@ -46,14 +46,14 @@ public class GameDaoImpl implements GameDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(DELETE_SQL);
             stmt.setInt(1, id);
             return stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("删除游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBGameProcessUtil.close(conn, stmt);
         }
     }
 
@@ -62,7 +62,7 @@ public class GameDaoImpl implements GameDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(UPDATE_SQL);
             stmt.setString(1, game.getGameType());
             stmt.setTimestamp(2, new java.sql.Timestamp(game.getStartTime().getTime()));
@@ -73,7 +73,7 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             throw new RuntimeException("更新游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt);
+            DBGameProcessUtil.close(conn, stmt);
         }
     }
 
@@ -83,7 +83,7 @@ public class GameDaoImpl implements GameDao {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_ID_SQL);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
@@ -100,7 +100,7 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             throw new RuntimeException("查询游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -111,7 +111,7 @@ public class GameDaoImpl implements GameDao {
         ResultSet rs = null;
         List<Game> games = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_ALL_SQL);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -127,7 +127,7 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             throw new RuntimeException("查询所有游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -138,7 +138,7 @@ public class GameDaoImpl implements GameDao {
         ResultSet rs = null;
         List<Game> games = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_GAME_TYPE_SQL);
             stmt.setString(1, gameType);
             rs = stmt.executeQuery();
@@ -155,7 +155,7 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据游戏类型查询游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 
@@ -166,7 +166,7 @@ public class GameDaoImpl implements GameDao {
         ResultSet rs = null;
         List<Game> games = new ArrayList<>();
         try {
-            conn = DBUtil.getConnection();
+            conn = DBGameProcessUtil.getConnection();
             stmt = conn.prepareStatement(SELECT_BY_GAME_MASTER_SQL);
             stmt.setString(1, gameMaster);
             rs = stmt.executeQuery();
@@ -183,7 +183,7 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             throw new RuntimeException("根据游戏主持人查询游戏失败", e);
         } finally {
-            DBUtil.close(conn, stmt, rs);
+            DBGameProcessUtil.close(conn, stmt, rs);
         }
     }
 }

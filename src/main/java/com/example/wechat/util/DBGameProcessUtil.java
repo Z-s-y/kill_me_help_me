@@ -5,12 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DBUtil {
+public class DBGameProcessUtil {
     private static final Properties props = new Properties();
 
     static {
         try {
-            props.load(DBUtil.class.getClassLoader().getResourceAsStream("db.properties"));
+            props.load(DBUserInformationUtil.class.getClassLoader().getResourceAsStream("db_game_process"));
             Class.forName(props.getProperty("jdbc.driver"));
         } catch (Exception e) {
             throw new RuntimeException("数据库驱动加载失败", e);
@@ -65,3 +65,4 @@ public class DBUtil {
         }
     }
 }
+
