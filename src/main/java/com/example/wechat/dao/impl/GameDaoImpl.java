@@ -34,6 +34,7 @@ public class GameDaoImpl implements GameDao {
             stmt.setString(4, game.getGameMaster());
             return stmt.executeUpdate();
         } catch (SQLException e) {
+            System.out.println(e);
             throw new RuntimeException("插入游戏失败", e);
         } finally {
             DBUtil.close(conn, stmt);
